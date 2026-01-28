@@ -27,8 +27,8 @@ You may add as many function as you would like
 
 ### Instructions for running the tests
 
-With pipenv:
+With Poetry:
 
-- Run `pipenv install --dev` to install dependencies
-- Run `pipenv run pytest` to run the tests
+- Run `poetry install` to install dependencies
+- Run `poetry run pytest` to run the tests
 
