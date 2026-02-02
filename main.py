@@ -1,5 +1,25 @@
+"""
+Transaction Analysis Module
+
+Analyses bank transaction data to produce summaries for:
+- Total income and spending
+- Spending breakdown by category
+- Salary income breakdown by payer
+
+Note: For this task, all code is kept in a single file for simplicity. In a larger
+project, this could be split into:
+- models.py: Data classes (Summary, CategorySummary, PayerSummary)
+- formatters.py: Currency formatting utilities
+- analysis.py: Transaction analysis functions
+- report.py: Report generation and output
+"""
 from dataclasses import dataclass
 from decimal import Decimal
+
+
+# =============================================================================
+# Data Models
+# =============================================================================
 
 
 @dataclass
@@ -22,11 +42,21 @@ class PayerSummary:
     total: Decimal
 
 
+# =============================================================================
+# Formatting
+# =============================================================================
+
+
 def format_currency(amount: Decimal) -> str:
     """Format a Decimal amount as GBP currency string."""
     if amount < 0:
         return f"-£{abs(amount):,.2f}"
     return f"£{amount:,.2f}"
+
+
+# =============================================================================
+# Analysis Functions
+# =============================================================================
 
 
 def get_income_summary(transactions: list[dict[str, str]]) -> Summary:
@@ -102,6 +132,11 @@ def get_salary_by_payer(transactions: list[dict[str, str]]) -> list[PayerSummary
         )
         for payer, amounts in sorted(payers.items())
     ]
+
+
+# =============================================================================
+# Report Output
+# =============================================================================
 
 
 def print_report(transactions: list[dict[str, str]]) -> None:
